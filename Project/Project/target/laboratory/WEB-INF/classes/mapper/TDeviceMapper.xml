@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.TDeviceMapper">
+    <resultMap id="BaseResultMap" type="model.TDevice">
+        <id column="dvcid" jdbcType="INTEGER" property="dvcid"/>
+        <result column="createddate" jdbcType="TIMESTAMP" property="createddate"/>
+        <result column="updateddate" jdbcType="TIMESTAMP" property="updateddate"/>
+        <result column="deleteddate" jdbcType="TIMESTAMP" property="deleteddate"/>
+        <result column="creatorid" jdbcType="INTEGER" property="creatorid"/>
+        <result column="updaterid" jdbcType="INTEGER" property="updaterid"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="brand" jdbcType="VARCHAR" property="brand"/>
+        <result column="number" jdbcType="INTEGER" property="number"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="sumprice" jdbcType="INTEGER" property="sumprice"/>
+        <result column="unitprice" jdbcType="INTEGER" property="unitprice"/>
+        <result column="instructions" jdbcType="VARCHAR" property="instructions"/>
+        <result column="imagelist" jdbcType="VARCHAR" property="imagelist"/>
+        <result column="expirationdate" jdbcType="VARCHAR" property="expirationdate"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="labid" jdbcType="INTEGER" property="labid"/>
+        <result column="labname" jdbcType="VARCHAR" property="labname"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        dvcid
+        , createddate, updateddate, deleteddate, creatorid, updaterid, type, name, brand,
+    number, status, sumprice, unitprice, instructions, imagelist, expirationdate, remark, 
+    labid, labname, eqid
+    </sql>
+
+    <select id="selectBySelective" resultType="model.TDevice" parameterType="model.TDevice">
+        select * from t_device
+        <where>
+
+            <trim prefixOverrides="and>">
+
+                <if test="dvcid!=null and dvcid!=''">
+                    and dvcid = #{dvcid}
+                </if>
+
+                <if test="updateddate!=null and updateddate!=''">
+                    and updateddate like '%${updateddate}%'
+                </if>
+
+                <if test="createddate!=null and createddate!=''">
+                    and createddate like '%${createddate}%'
+                </if>
+
+                <if test="deleteddate!=null and deleteddate!=''">
+                    and deleteddate like '%${deleteddate}%'
+                </if>
+
+                <if test="creatorid!=null and creatorid!=''">
+                    and creatorid = #{creatorid}
+                </if>
+
+                <if test="updaterid!=null and updaterid!=''">
+                    and updaterid = #{updaterid}
+                </if>
+
+                <if test="createddate!=null and createddate!=''">
+                    and createddate like '%${createddate}%'
+                </if>
+
+                <if test="type!=null and type!=''">
+                    and type like '%${type}%'
+                </if>
+
+                <if test="name!=null and name!=''">
+                    and name like '%${name}%'
+                </if>
+
+                <if test="brand!=null and brand!=''">
+                    and brand like '%${brand}%'
+                </if>
+
+                <if test="number!=null and number!=''">
+                    and number = #{number}
+                </if>
+
+                <if test="status!=null and status!=''">
+                    and status like '%${status}%'
+                </if>
+
+                <if test="sumprice!=null and sumprice!=''">
+                    and sumprice = #{sumprice}
+                </if>
+
+                <if test="unitprice!=null and unitprice!=''">
+                    and unitprice = #{unitprice}
+                </if>
+
+                <if test="instructions!=null and instructions!=''">
+                    and instructions like '%${instructions}%'
+                </if>
+
+                <if test="imagelist!=null and imagelist!=''">
+                    and imagelist like '%${imagelist}%'
+                </if>
+
+                <if test="expirationdate!=null and expirationdate!=''">
+                    and expirationdate like '%${expirationdate}%'
+                </if>
+
+                <if test="remark!=null and remark!=''">
+                    and remark like '%${remark}%'
+                </if>
+
+                <if test="labid!=null and labid!=''">
+                    and labid = #{labid}
+                </if>
+
+                <if test="labname!=null and labname!=''">
+                    and labname like '%${labname}%'
+                </if>
+
+                <if test="eqid!=null and eqid!=''">
+                    and eqid = #{eqid}
+                </if>
+
+            </trim>
+
+        </where>
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_device
+        where dvcid = #{dvcid,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from t_device
+        where dvcid = #{dvcid,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="model.TDevice">
+        insert into t_device (dvcid, createddate, updateddate,
+                              deleteddate, creatorid, updaterid,
+                              type, name, brand,
+                              number, status, sumprice,
+                              unitprice, instructions, imagelist,
+                              expirationdate, remark, labid,
+                              labname)
+        values (#{dvcid,jdbcType=INTEGER}, #{createddate,jdbcType=TIMESTAMP}, #{updateddate,jdbcType=TIMESTAMP},
+                #{deleteddate,jdbcType=TIMESTAMP}, #{creatorid,jdbcType=INTEGER}, #{updaterid,jdbcType=INTEGER},
+                #{type,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR},
+                #{number,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{sumprice,jdbcType=INTEGER},
+                #{unitprice,jdbcType=INTEGER}, #{instructions,jdbcType=VARCHAR}, #{imagelist,jdbcType=VARCHAR},
+                #{expirationdate,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{labid,jdbcType=INTEGER},
+                #{labname,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="model.TDevice">
+        insert into t_device
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dvcid != null">
+                dvcid,
+            </if>
+            <if test="createddate != null">
+                createddate,
+            </if>
+            <if test="updateddate != null">
+                updateddate,
+            </if>
+            <if test="deleteddate != null">
+                deleteddate,
+            </if>
+            <if test="creatorid != null">
+                creatorid,
+            </if>
+            <if test="updaterid != null">
+                updaterid,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="brand != null">
+                brand,
+            </if>
+            <if test="number != null">
+                number,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="sumprice != null">
+                sumprice,
+            </if>
+            <if test="unitprice != null">
+                unitprice,
+            </if>
+            <if test="instructions != null">
+                instructions,
+            </if>
+            <if test="imagelist != null">
+                imagelist,
+            </if>
+            <if test="expirationdate != null">
+                expirationdate,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="labid != null">
+                labid,
+            </if>
+            <if test="labname != null">
+                labname,
+            </if>
+            <if test="eqid != null">
+                eqid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dvcid != null">
+                #{dvcid,jdbcType=INTEGER},
+            </if>
+            <if test="createddate != null">
+                #{createddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateddate != null">
+                #{updateddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteddate != null">
+                #{deleteddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creatorid != null">
+                #{creatorid,jdbcType=INTEGER},
+            </if>
+            <if test="updaterid != null">
+                #{updaterid,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="brand != null">
+                #{brand,jdbcType=VARCHAR},
+            </if>
+            <if test="number != null">
+                #{number,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="sumprice != null">
+                #{sumprice,jdbcType=INTEGER},
+            </if>
+            <if test="unitprice != null">
+                #{unitprice,jdbcType=INTEGER},
+            </if>
+            <if test="instructions != null">
+                #{instructions,jdbcType=VARCHAR},
+            </if>
+            <if test="imagelist != null">
+                #{imagelist,jdbcType=VARCHAR},
+            </if>
+            <if test="expirationdate != null">
+                #{expirationdate,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="labid != null">
+                #{labid,jdbcType=INTEGER},
+            </if>
+            <if test="labname != null">
+                #{labname,jdbcType=VARCHAR},
+            </if>
+            <if test="eqid != null">
+                #{eqid,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="model.TDevice">
+        update t_device
+        <set>
+            <if test="createddate != null">
+                createddate = #{createddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateddate != null">
+                updateddate = #{updateddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteddate != null">
+                deleteddate = #{deleteddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creatorid != null">
+                creatorid = #{creatorid,jdbcType=INTEGER},
+            </if>
+            <if test="updaterid != null">
+                updaterid = #{updaterid,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="brand != null">
+                brand = #{brand,jdbcType=VARCHAR},
+            </if>
+            <if test="number != null">
+                number = #{number,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="sumprice != null">
+                sumprice = #{sumprice,jdbcType=INTEGER},
+            </if>
+            <if test="unitprice != null">
+                unitprice = #{unitprice,jdbcType=INTEGER},
+            </if>
+            <if test="instructions != null">
+                instructions = #{instructions,jdbcType=VARCHAR},
+            </if>
+            <if test="imagelist != null">
+                imagelist = #{imagelist,jdbcType=VARCHAR},
+            </if>
+            <if test="expirationdate != null">
+                expirationdate = #{expirationdate,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="labid != null">
+                labid = #{labid,jdbcType=INTEGER},
+            </if>
+            <if test="labname != null">
+                labname = #{labname,jdbcType=VARCHAR},
+            </if>
+            <if test="eqid != null">
+                eqid = #{eqid,jdbcType=INTEGER},
+            </if>
+        </set>
+        where dvcid = #{dvcid,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="model.TDevice">
+        update t_device
+        set createddate    = #{createddate,jdbcType=TIMESTAMP},
+            updateddate    = #{updateddate,jdbcType=TIMESTAMP},
+            deleteddate    = #{deleteddate,jdbcType=TIMESTAMP},
+            creatorid      = #{creatorid,jdbcType=INTEGER},
+            updaterid      = #{updaterid,jdbcType=INTEGER},
+            type           = #{type,jdbcType=INTEGER},
+            name           = #{name,jdbcType=VARCHAR},
+            brand          = #{brand,jdbcType=VARCHAR},
+            number         = #{number,jdbcType=INTEGER},
+            status         = #{status,jdbcType=INTEGER},
+            sumprice       = #{sumprice,jdbcType=INTEGER},
+            unitprice      = #{unitprice,jdbcType=INTEGER},
+            instructions   = #{instructions,jdbcType=VARCHAR},
+            imagelist      = #{imagelist,jdbcType=VARCHAR},
+            expirationdate = #{expirationdate,jdbcType=VARCHAR},
+            remark         = #{remark,jdbcType=VARCHAR},
+            labid          = #{labid,jdbcType=INTEGER},
+            labname        = #{labname,jdbcType=VARCHAR} eqid          = #{eqid,jdbcType=INTEGER},
+        where dvcid = #{dvcid,jdbcType=INTEGER}
+    </update>
+</mapper>

@@ -1,0 +1,19 @@
+
+@page {
+    margin:.25in;
+    padding:0;
+}
+
+@media print {
+    html, body {
+        color: #070d13;
+        width:110%;
+        height:auto;
+        margin:auto;
+        padding:0;
+    }
+
+    #main_container { left:-278px !important; }
+    #playbar { display:none !important; }
+    [id^="Button_"]{ display:none !important;}
+}

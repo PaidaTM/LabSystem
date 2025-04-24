@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.TStatusTypeMapper">
+  <resultMap id="BaseResultMap" type="model.TStatusType">
+    <id column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="condition" jdbcType="VARCHAR" property="condition" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sid, status, condition
+  </sql>
+
+  <select id="selectBySelective" parameterType="java.lang.Integer" resultType="model.TStatusType">
+    select *
+    from t_statustype
+  <where>
+    <trim prefixOverrides="and">
+
+      <if test="sid!=null and sid!=''">
+        and sid = #{sid}
+      </if>
+
+      <if test="status!=null and status!=''">
+        and status like '%${status}%'
+      </if>
+
+    </trim>
+  </where>
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_statustype
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_statustype
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="model.TStatusType">
+    insert into t_statustype (sid, status, condition
+      )
+    values (#{sid,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, #{condition,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="model.TStatusType">
+    insert into t_statustype
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="condition != null">
+        condition,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="condition != null">
+        #{condition,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="model.TStatusType">
+    update t_statustype
+    <set>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="condition != null">
+        condition = #{condition,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.TStatusType">
+    update t_statustype
+    set status = #{status,jdbcType=VARCHAR},
+      condition = #{condition,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.TLabUserMapper">
+    <resultMap id="BaseResultMap" type="model.TLabUser">
+        <id column="userid" jdbcType="INTEGER" property="userid"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="firstname" jdbcType="VARCHAR" property="firstname"/>
+        <result column="lastname" jdbcType="VARCHAR" property="lastname"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="gender" jdbcType="CHAR" property="gender"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="educaton" jdbcType="VARCHAR" property="educaton"/>
+        <result column="collegename" jdbcType="VARCHAR" property="collegename"/>
+        <result column="utid" jdbcType="INTEGER" property="utid"/>
+        <result column="mail" jdbcType="VARCHAR" property="mail"/>
+        <result column="profilephoto" jdbcType="VARCHAR" property="profilephoto"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        userid
+        , password, firstname, lastname, name, gender, phone, educaton, collegename, utid, mail, profilephoto
+    </sql>
+
+    <select id="selectBySelective" parameterType="model.TLabUser" resultType="model.TLabUser">
+        select * from t_labuser
+
+        <where>
+
+            <trim prefixOverrides="and">
+
+                <if test="userid!=null and userid!=''">
+                    and userid = #{userid}
+                </if>
+
+                <if test="password!=null and password!=''">
+                    and password like '%${password}%'
+                </if>
+
+                <if test="firstname!=null and firstname!=''">
+                    and firstname like '%${firstname}%'
+                </if>
+
+                <if test="lastname!=null and lastname!=''">
+                    and lastname like '%${lastname}%'
+                </if>
+
+                <if test="name!=null and name!=''">
+                    and name like '%${name}%'
+                </if>
+
+                <if test="gender!=null and gender!=''">
+                    and gender like #{gender}
+                </if>
+
+                <if test="phone!=null and phone!=''">
+                    and phone like '%${phone}%'
+                </if>
+
+                <if test="educaton!=null and educaton!=''">
+                    and educaton like '%${educaton}%'
+                </if>
+
+                <if test="collegename!=null and collegename!=''">
+                    and collegename like '%${collegename}%'
+                </if>
+
+                <if test="utid!=null and utid!=''">
+                    and utid = #{utid}
+                </if>
+
+                <if test="mail!=null and mail!=''">
+                    and mail like '%${mail}%'
+                </if>
+
+                <if test="profilephoto!=null and profilephoto!=''">
+                    and profilephoto like '%${profilephoto}%'
+                </if>
+            </trim>
+
+        </where>
+
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_labuser
+        where userid = #{userid,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from t_labuser
+        where userid = #{userid,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="model.TLabUser">
+        insert into t_labuser (userid, password,
+                               name, firstname, lastname, gender, phone, educaton,
+                               collegename, utid, mail)
+        values (#{userid,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR},
+                #{name,jdbcType=VARCHAR}, #{firstname,jdbcType=VARCHAR}, #{lastname,jdbcType=VARCHAR},
+                #{gender,jdbcType=CHAR}, #{phone,jdbcType=VARCHAR},
+                #{educaton,jdbcType=VARCHAR},
+                #{collegename,jdbcType=VARCHAR}, #{utid,jdbcType=INTEGER}, #{mail,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="model.TLabUser">
+        insert into t_labuser
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userid != null">
+                userid,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="firstname != null">
+                firstname,
+            </if>
+            <if test="lastname != null">
+                lastname,
+            </if>
+
+            <if test="gender != null">
+                gender,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="educaton != null">
+                educaton,
+            </if>
+            <if test="collegename != null">
+                collegename,
+            </if>
+            <if test="utid != null">
+                utid,
+            </if>
+            <if test="mail != null">
+                mail,
+            </if>
+            <if test="profilephoto != null">
+                profilephoto,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userid != null">
+                #{userid,jdbcType=INTEGER},
+            </if>
+
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="firstname != null">
+                #{firstname,jdbcType=VARCHAR},
+            </if>
+            <if test="lastname != null">
+                #{lastname,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                #{gender,jdbcType=CHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="educaton != null">
+                #{educaton,jdbcType=VARCHAR},
+            </if>
+            <if test="collegename != null">
+                #{collegename,jdbcType=VARCHAR},
+            </if>
+            <if test="utid != null">
+                #{utid,jdbcType=INTEGER},
+            </if>
+            <if test="mail != null">
+                #{mail,jdbcType=VARCHAR},
+            </if>
+            <if test="profilephoto != null">
+                #{profilephoto,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="model.TLabUser">
+        update t_labuser
+        <set>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="firstname != null">
+                firstname = #{firstname,jdbcType=VARCHAR},
+            </if>
+            <if test="lastname != null">
+                lastname = #{lastname,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                gender = #{gender,jdbcType=CHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="educaton != null">
+                educaton = #{educaton,jdbcType=VARCHAR},
+            </if>
+            <if test="collegename != null">
+                collegename = #{collegename,jdbcType=VARCHAR},
+            </if>
+            <if test="utid != null">
+                utid = #{utid,jdbcType=INTEGER},
+            </if>
+            <if test="mail != null">
+                mail = #{mail,jdbcType=VARCHAR},
+            </if>
+            <if test="profilephoto != null">
+                profilephoto = #{profilephoto,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where userid = #{userid,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="model.TLabUser">
+        update t_labuser
+        set password     = #{password,jdbcType=VARCHAR},
+            name         = #{name,jdbcType=VARCHAR},
+            firstname    = #{firstname,jdbcType=VARCHAR},
+            lastname     = #{lastname,jdbcType=VARCHAR},
+            gender       = #{gender,jdbcType=CHAR},
+            phone        = #{phone,jdbcType=VARCHAR},
+            educaton     = #{educaton,jdbcType=VARCHAR},
+            collegename  = #{collegename,jdbcType=VARCHAR},
+            utid         = #{utid,jdbcType=INTEGER},
+            mail         = #{mail,jdbcType=VARCHAR},
+            profilephoto = #{profilephoto,jdbcType=VARCHAR}
+        where userid = #{userid,jdbcType=INTEGER}
+    </update>
+
+</mapper>

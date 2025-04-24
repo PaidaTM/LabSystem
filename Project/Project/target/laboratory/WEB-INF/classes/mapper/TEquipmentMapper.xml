@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.TEquipmentMapper">
+    <resultMap id="BaseResultMap" type="model.TEquipment">
+        <id column="eqid" jdbcType="INTEGER" property="eqid"/>
+        <result column="createddate" jdbcType="TIMESTAMP" property="createddate"/>
+        <result column="updateddate" jdbcType="TIMESTAMP" property="updateddate"/>
+        <result column="deleteddate" jdbcType="TIMESTAMP" property="deleteddate"/>
+        <result column="creatorid" jdbcType="VARCHAR" property="creatorid"/>
+        <result column="updaterid" jdbcType="INTEGER" property="updaterid"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="balance" jdbcType="INTEGER" property="balance"/>
+        <result column="number" jdbcType="INTEGER" property="number"/>
+        <result column="reason" jdbcType="VARCHAR" property="reason"/>
+        <result column="repairneed" jdbcType="INTEGER" property="repairneed"/>
+        <result column="mantaindate" jdbcType="VARCHAR" property="mantaindate"/>
+        <result column="principal" jdbcType="VARCHAR" property="principal"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="cost" jdbcType="VARCHAR" property="cost"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="equipmentname" jdbcType="VARCHAR" property="equipmentname"/>
+        <result column="labid" jdbcType="INTEGER" property="labid"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        eqid
+        , createddate, updateddate, deleteddate, creatorid, updaterid, type, balance,
+    number, reason, repairneed, mantaindate, principal, phone, cost, address, equipmentname,
+    labid
+    </sql>
+
+    <select id="selectBySelective" parameterType="model.TEquipment" resultType="model.TEquipment">
+        select * from t_equipment
+
+        <where>
+
+            <trim prefixOverrides="and">
+
+                <if test="eqid!=null and eqid!=''">
+                    and eqid = #{eqid}
+                </if>
+
+                <if test="equipmentname!=null and equipmentname!=''">
+                    and equipmentname like '%${equipmentname}%'
+                </if>
+
+                <if test="updateddate!=null and updateddate!=''">
+                    and updateddate like '%${updateddate}%'
+                </if>
+
+                <if test="deleteddate!=null and deleteddate!=''">
+                    and deleteddate like '%${deleteddate}%'
+                </if>
+
+
+                <if test="creatorid!=null and creatorid!=''">
+                    and creatorid = #{creatorid}
+                </if>
+
+
+                <if test="updaterid!=null and updaterid!=''">
+                    and updaterid = #{updaterid}
+                </if>
+
+
+                <if test="type!=null and type!=''">
+                    and type like '%${type}%'
+                </if>
+
+
+                <if test="balance!=null and balance!=''">
+                    and balance like '%${balance}%'
+                </if>
+
+
+                <if test="number!=null and number!=''">
+                    and number like '%${number}%'
+                </if>
+
+
+                <if test="reason!=null and reason!=''">
+                    and reason = #{reason}
+                </if>
+
+
+                <if test="repairneed!=null and repairneed!=''">
+                    and repairneed like '%${repairneed}%'
+                </if>
+
+
+                <if test="mantaindate!=null and mantaindate!=''">
+                    and mantaindate like '%${mantaindate}%'
+                </if>
+
+
+                <if test="principal!=null and principal!=''">
+                    and principal like '%${principal}%'
+                </if>
+
+
+                <if test="phone!=null and phone!=''">
+                    and phone like '%${phone}%'
+                </if>
+
+
+                <if test="cost!=null and cost!=''">
+                    and cost like '%${cost}%'
+                </if>
+
+
+                <if test="address!=null and address!=''">
+                    and address like '%${address}%'
+                </if>
+
+
+                <if test="labid!=null and labid!=''">
+                    and labid = #{labid}
+                </if>
+
+            </trim>
+
+        </where>
+
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_equipment
+        where eqId = #{eqid,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from t_equipment
+        where eqId = #{eqid,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="model.TEquipment">
+        insert into t_equipment (eqId, createdDate, updatedDate,
+                                 deletedDate, creatorId, updaterId,
+                                 type, balance, number,
+                                 reason, repairneed, mantainDate,
+                                 principal, phone, cost,
+                                 address, equipmentname, labId)
+        values (#{eqid,jdbcType=INTEGER}, #{createddate,jdbcType=TIMESTAMP}, #{updateddate,jdbcType=TIMESTAMP},
+                #{deleteddate,jdbcType=TIMESTAMP}, #{creatorid,jdbcType=VARCHAR}, #{updaterid,jdbcType=INTEGER},
+                #{type,jdbcType=INTEGER}, #{balance,jdbcType=INTEGER}, #{number,jdbcType=INTEGER},
+                #{reason,jdbcType=VARCHAR}, #{repairneed,jdbcType=INTEGER}, #{mantaindate,jdbcType=VARCHAR},
+                #{principal,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{cost,jdbcType=VARCHAR},
+                #{address,jdbcType=VARCHAR}, #{equipmentname,jdbcType=VARCHAR}, #{labid,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" parameterType="model.TEquipment">
+        insert into t_equipment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="eqid != null">
+                eqId,
+            </if>
+            <if test="createddate != null">
+                createdDate,
+            </if>
+            <if test="updateddate != null">
+                updatedDate,
+            </if>
+            <if test="deleteddate != null">
+                deletedDate,
+            </if>
+            <if test="creatorid != null">
+                creatorId,
+            </if>
+            <if test="updaterid != null">
+                updaterId,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="balance != null">
+                balance,
+            </if>
+            <if test="number != null">
+                number,
+            </if>
+            <if test="reason != null">
+                reason,
+            </if>
+            <if test="repairneed != null">
+                repairneed,
+            </if>
+            <if test="mantaindate != null">
+                mantainDate,
+            </if>
+            <if test="principal != null">
+                principal,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="cost != null">
+                cost,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="equipmentname != null">
+                equipmentname,
+            </if>
+            <if test="labid != null">
+                labId,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="eqid != null">
+                #{eqid,jdbcType=INTEGER},
+            </if>
+            <if test="createddate != null">
+                #{createddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateddate != null">
+                #{updateddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteddate != null">
+                #{deleteddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creatorid != null">
+                #{creatorid,jdbcType=VARCHAR},
+            </if>
+            <if test="updaterid != null">
+                #{updaterid,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="balance != null">
+                #{balance,jdbcType=INTEGER},
+            </if>
+            <if test="number != null">
+                #{number,jdbcType=INTEGER},
+            </if>
+            <if test="reason != null">
+                #{reason,jdbcType=VARCHAR},
+            </if>
+            <if test="repairneed != null">
+                #{repairneed,jdbcType=INTEGER},
+            </if>
+            <if test="mantaindate != null">
+                #{mantaindate,jdbcType=VARCHAR},
+            </if>
+            <if test="principal != null">
+                #{principal,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="cost != null">
+                #{cost,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="equipmentname != null">
+                #{equipmentname,jdbcType=VARCHAR},
+            </if>
+            <if test="labid != null">
+                #{labid,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="model.TEquipment">
+        update t_equipment
+        <set>
+            <if test="createddate != null">
+                createdDate = #{createddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateddate != null">
+                updatedDate = #{updateddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteddate != null">
+                deletedDate = #{deleteddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creatorid != null">
+                creatorId = #{creatorid,jdbcType=VARCHAR},
+            </if>
+            <if test="updaterid != null">
+                updaterId = #{updaterid,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="balance != null">
+                balance = #{balance,jdbcType=INTEGER},
+            </if>
+            <if test="number != null">
+                number = #{number,jdbcType=INTEGER},
+            </if>
+            <if test="reason != null">
+                reason = #{reason,jdbcType=VARCHAR},
+            </if>
+            <if test="repairneed != null">
+                repairneed = #{repairneed,jdbcType=INTEGER},
+            </if>
+            <if test="mantaindate != null">
+                mantainDate = #{mantaindate,jdbcType=VARCHAR},
+            </if>
+            <if test="principal != null">
+                principal = #{principal,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="cost != null">
+                cost = #{cost,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="equipmentname != null">
+                equipmentname = #{equipmentname,jdbcType=VARCHAR},
+            </if>
+            <if test="labid != null">
+                labId = #{labid,jdbcType=INTEGER},
+            </if>
+        </set>
+        where eqId = #{eqid,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="model.TEquipment">
+        update t_equipment
+        set createdDate   = #{createddate,jdbcType=TIMESTAMP},
+            updatedDate   = #{updateddate,jdbcType=TIMESTAMP},
+            deletedDate   = #{deleteddate,jdbcType=TIMESTAMP},
+            creatorId     = #{creatorid,jdbcType=VARCHAR},
+            updaterId     = #{updaterid,jdbcType=INTEGER},
+            type          = #{type,jdbcType=INTEGER},
+            balance       = #{balance,jdbcType=INTEGER},
+            number        = #{number,jdbcType=INTEGER},
+            reason        = #{reason,jdbcType=VARCHAR},
+            repairneed    = #{repairneed,jdbcType=INTEGER},
+            mantainDate   = #{mantaindate,jdbcType=VARCHAR},
+            principal     = #{principal,jdbcType=VARCHAR},
+            phone         = #{phone,jdbcType=VARCHAR},
+            cost          = #{cost,jdbcType=VARCHAR},
+            address       = #{address,jdbcType=VARCHAR},
+            equipmentname = #{equipmentname,jdbcType=VARCHAR},
+            labId         = #{labid,jdbcType=INTEGER}
+        where eqId = #{eqid,jdbcType=INTEGER}
+    </update>
+
+</mapper>
