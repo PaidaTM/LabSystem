@@ -23,6 +23,18 @@ A Java-based web application for managing university laboratory resources and us
 
 ## 📂 Structure
 
+lab-management-system/
+├── src/
+├── target/ (optional; usually ignored)
+├── .idea/ (optional; ignore in Git)
+├── .vscode/ (optional; ignore in Git)
+├── pom.xml
+├── lab.iml
+├── TLabUser(etendend_relations).uml
+├── .gitignore
+└── README.md
+
+
 
 ## 📖 Documentation
 See the full [thesis PDF](link to file or GitHub hosted PDF).
