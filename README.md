@@ -46,5 +46,5 @@ See the full [thesis PDF](link to file or GitHub hosted PDF).
 4. Run the application on Tomcat
 
 ## 👨‍💻 Author
-Paida Mazambani ([YTBU] Yunnan Technology and Business University 2019-2023)
+Paidamoyo T Mazambani ([YTBU] Yunnan Technology and Business University 2019-2023)
 
